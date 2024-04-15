@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#line 1 "C:\\NTNU\\ingeniør prosjekt (esi)\\IngProProsjekt\\Charging\\Charging.ino"
-#include <IRremote.h>
+#line 1 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+//#include <IRremote.h>
 #include <Wire.h>
 #include <Zumo32U4.h>
 #include <EEPROM.h>
@@ -30,8 +30,6 @@ float rightDist = ((rotRight + abs(currRotRight))*3.1415*0.039)/910;
 float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
-
-//leoekfejf
 
 int batteryStatus(battery) {
     float dist = distMeasure();

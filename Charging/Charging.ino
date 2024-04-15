@@ -11,7 +11,7 @@ Zumo32U4OLED display;
 Zumo32U4Buzzer buzzer;
 Zumo32U4Encoders encoder;
 
-int battery = 20;
+int battery = 80;
 int amount = 40;
 int max = 80;
 
@@ -29,9 +29,7 @@ float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
 
-//leoekfejf
-
-int batteryStatus(battery) {
+int batteryDrain(battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;
     return battery;

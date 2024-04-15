@@ -29,6 +29,8 @@ float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
 
+//leoekfejf
+
 int batteryStatus(battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;

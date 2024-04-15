@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 1 "C:\\NTNU\\ingeniør prosjekt (esi)\\IngProProsjekt\\Charging\\Charging.ino"
 #include <IRremote.h>
 #include <Wire.h>
 #include <Zumo32U4.h>

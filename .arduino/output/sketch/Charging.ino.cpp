@@ -21,19 +21,6 @@ int power;
 int amount = 40;
 int max = 80;
 
-#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-float distMeasure();
-#line 36 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-int batteryDrain(battery);
-#line 43 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-int charge(amount, battery);
-#line 50 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void showBattery();
-#line 59 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void setup();
-#line 80 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void loop();
-#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 static long int rotLeft = 0;
@@ -48,17 +35,18 @@ float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
 
-int batteryDrain(battery) {
+int batteryDrain(int battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;
     EEPROM.write(0, battery);
     return battery;
 }
 
-int charge(amount, battery) {
+int charge(amount; int battery) {
     battery = battery + amount;
-    if(battery>max)
+    if(battery>max) {
         battery = max;
+    }
     return battery;
 }
 

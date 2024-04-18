@@ -5,8 +5,6 @@
 #include <Zumo32U4.h>
 #include <EEPROM.h>
 #include <WiFi.h>
-#include <HTTPClient.h>
-#include <WebServer.h>
  
 const char* ssid = "NTNU-IOT";
 const char* password = "";
@@ -23,6 +21,19 @@ int power;
 int amount = 40;
 int max = 80;
 
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+float distMeasure();
+#line 36 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+int batteryDrain(battery);
+#line 43 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+int charge(amount, battery);
+#line 50 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void showBattery();
+#line 59 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void setup();
+#line 80 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void loop();
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 static long int rotLeft = 0;

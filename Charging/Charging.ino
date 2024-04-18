@@ -3,8 +3,6 @@
 #include <Zumo32U4.h>
 #include <EEPROM.h>
 #include <WiFi.h>
-#include <HTTPClient.h>
-#include <WebServer.h>
  
 const char* ssid = "NTNU-IOT";
 const char* password = "";
@@ -35,17 +33,18 @@ float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
 
-int batteryDrain(battery) {
+int batteryDrain(int battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;
     EEPROM.write(0, battery);
     return battery;
 }
 
-int charge(amount, battery) {
+int charge(amount; int battery) {
     battery = battery + amount;
-    if(battery>max)
+    if(battery>max) {
         battery = max;
+    }
     return battery;
 }
 

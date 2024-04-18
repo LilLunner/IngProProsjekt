@@ -4,6 +4,12 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
 #include <EEPROM.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <WebServer.h>
+ 
+const char* ssid = "NTNU-IOT";
+const char* password = "";
 Zumo32U4Motors motors;
 Zumo32U4ButtonA buttonA;
 Zumo32U4ButtonB buttonB;
@@ -16,6 +22,7 @@ Zumo32U4Encoders encoder;
 int battery = 80;
 int amount = 40;
 int max = 80;
+int priceBase =
 
 float distMeasure()
 {
@@ -45,7 +52,21 @@ int charge(amount, battery) {
 }
 
 void setup() {
-
+    Serial.begin(115200);
+  
+    Serial.println("Try Connecting to ");
+    Serial.println(ssid);
+    WiFi.begin(ssid, password); // Connect to your wi-fi modem
+ 
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(1000);
+        Serial.print(".");
+    }
+    Serial.println("");
+    Serial.println("WiFi connected successfully");
+    Serial.print("Got IP: ");
+    Serial.println(WiFi.localIP());  //Show ESP32-IP on serialmonitor
+    delay(100);
 }
 
 void loop() {

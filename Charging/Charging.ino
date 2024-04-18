@@ -17,10 +17,9 @@ Zumo32U4OLED display;
 Zumo32U4Buzzer buzzer;
 Zumo32U4Encoders encoder;
 
-int battery = 80;
+int power;
 int amount = 40;
 int max = 80;
-int priceBase =
 
 float distMeasure()
 {
@@ -39,6 +38,7 @@ return distTot;
 int batteryDrain(battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;
+    EEPROM.write(0, battery);
     return battery;
 }
 
@@ -47,6 +47,15 @@ int charge(amount, battery) {
     if(battery>max)
         battery = max;
     return battery;
+}
+
+void showBattery() {
+    display.gotoXY(0, 0); 
+    display.print(F("Power: ")); 
+    display.println(power); 
+    display.gotoXY(0, 1); 
+    display.print("Distance left; "); 
+    display.print(power/0.2); 
 }
 
 void setup() {
@@ -65,8 +74,13 @@ void setup() {
     Serial.print("Got IP: ");
     Serial.println(WiFi.localIP());  //Show ESP32-IP on serialmonitor
     delay(100);
+
+    EEPROM.write(0, 80);
+    power = EEPROM.read(0);
 }
 
 void loop() {
-
+    motors.setSpeeds(100,100);
+    power = batteryDrain(power);
+    showBattery();
 }

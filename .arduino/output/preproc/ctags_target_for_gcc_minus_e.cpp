@@ -34,30 +34,31 @@ float distTot = (leftDist + rightDist)/2;
 return distTot;
 }
 
-int batteryDrain(battery) {
+int batteryDrain(int battery) {
     float dist = distMeasure();
     battery = battery - 4*dist;
     EEPROM.write(0, battery);
     return battery;
 }
 
-int charge(amount, battery) {
+int charge(amount; int battery) {
     battery = battery + amount;
-    if(battery>max)
+    if(battery>max) {
         battery = max;
+    }
     return battery;
 }
 
 void showBattery() {
     display.gotoXY(0, 0);
     display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 52 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 53 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 52 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 53 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  "Power: "
-# 52 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 53 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  ); &__c[0];}))
-# 52 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 53 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  )));
     display.println(power);
     display.gotoXY(0, 1);

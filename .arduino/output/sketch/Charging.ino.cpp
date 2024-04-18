@@ -21,6 +21,17 @@ int power;
 int amount = 40;
 int max = 80;
 
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+float distMeasure();
+#line 36 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+int batteryDrain(int battery);
+#line 51 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void showBattery();
+#line 60 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void setup();
+#line 81 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void loop();
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 static long int rotLeft = 0;

@@ -17,43 +17,39 @@ Zumo32U4OLED display;
 Zumo32U4Buzzer buzzer;
 Zumo32U4Encoders encoder;
 
+
 int power;
 int amount = 40;
 int max = 80;
+float totalDistance;
 
-#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-float distMeasure();
-#line 36 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-int batteryDrain(int battery);
-#line 51 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void showBattery();
-#line 60 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void setup();
-#line 81 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void loop();
-#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
-static long int rotLeft = 0;
-static long int rotRight = 0;
 int currRotLeft = encoder.getCountsAndResetLeft();              
 int currRotRight = encoder.getCountsAndResetRight();
-rotLeft += abs(currRotLeft);
-rotRight += abs(currRotRight);
-float leftDist = ((rotLeft + abs(currRotLeft))*3.1415*0.039)/910;
-float rightDist = ((rotRight + abs(currRotRight))*3.1415*0.039)/910;
-float distTot = (leftDist + rightDist)/2;
+float leftDist = ((abs(currRotLeft))*3.1415*0.039)/910;
+float rightDist = ((abs(currRotRight))*3.1415*0.039)/910;
+float distTot = totalDistance + 10*(leftDist + rightDist)/2;
+EEPROM.write(1, distTot);
 return distTot;
 }
 
 int batteryDrain(int battery) {
-    float dist = distMeasure();
-    battery = battery - 4*dist;
+    battery = max - 2*totalDistance;
+    if (battery < 0) {
+        battery = 0;
+    }
     EEPROM.write(0, battery);
     return battery;
 }
 
-int charge(amount; int battery) {
+/*int price() {
+    if(totalDistance> 2) {
+
+    }
+}*/
+
+int charge(int battery) {
     battery = battery + amount;
     if(battery>max) {
         battery = max;
@@ -66,14 +62,15 @@ void showBattery() {
     display.print(F("Power: ")); 
     display.println(power); 
     display.gotoXY(0, 1); 
-    display.print("Distance left; "); 
-    display.print(power/0.2); 
+    display.print("Distance drove; "); 
+    display.print(10*totalDistance); 
+    display.print("km");
 }
 
 void setup() {
     Serial.begin(115200);
-  
-    Serial.println("Try Connecting to ");
+    display.setLayout21x8();
+    /*Serial.println("Try Connecting to ");
     Serial.println(ssid);
     WiFi.begin(ssid, password); // Connect to your wi-fi modem
  
@@ -85,14 +82,17 @@ void setup() {
     Serial.println("WiFi connected successfully");
     Serial.print("Got IP: ");
     Serial.println(WiFi.localIP());  //Show ESP32-IP on serialmonitor
-    delay(100);
+    delay(100);*/
 
     EEPROM.write(0, 80);
+    EEPROM.write(1, 0);
     power = EEPROM.read(0);
+    totalDistance = EEPROM.read(1);
 }
 
 void loop() {
     motors.setSpeeds(100,100);
+    totalDistance = distMeasure();
     power = batteryDrain(power);
     showBattery();
 }

@@ -28,7 +28,7 @@ int currRotLeft = encoder.getCountsAndResetLeft();
 int currRotRight = encoder.getCountsAndResetRight();
 float leftDist = ((((currRotLeft)>0?(currRotLeft):-(currRotLeft)))*3.1415*0.039)/910;
 float rightDist = ((((currRotRight)>0?(currRotRight):-(currRotRight)))*3.1415*0.039)/910;
-float distTot = totalDistance + (leftDist + rightDist)/2;
+float distTot = totalDistance + 10*(leftDist + rightDist)/2;
 EEPROM.write(1, distTot);
 return distTot;
 }

@@ -23,6 +23,19 @@ int amount = 40;
 int max = 80;
 float totalDistance;
 
+#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+float distMeasure();
+#line 35 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+int batteryDrain(int battery);
+#line 53 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+int charge(int battery);
+#line 61 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void showBattery();
+#line 72 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void setup();
+#line 95 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+void loop();
+#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 int currRotLeft = encoder.getCountsAndResetLeft();              

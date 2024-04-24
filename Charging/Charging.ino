@@ -42,8 +42,11 @@ int batteryDrain(int battery) {
 }
 
 /*int price() {
-    if(totalDistance> 2) {
-
+    if(totalDistance=< 20) {
+        price = 63;
+    }
+    else {
+        price = 
     }
 }*/
 
@@ -56,12 +59,13 @@ int charge(int battery) {
 }
 
 void showBattery() {
+    int disShow = 10*totalDistance;
     display.gotoXY(0, 0); 
     display.print(F("Power: ")); 
     display.println(power); 
     display.gotoXY(0, 1); 
     display.print("Distance drove; "); 
-    display.print(10*totalDistance); 
+    display.print(disShow); 
     display.print("km");
 }
 

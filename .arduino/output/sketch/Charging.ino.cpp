@@ -23,19 +23,6 @@ int amount = 40;
 int max = 80;
 float totalDistance;
 
-#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-float distMeasure();
-#line 35 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-int batteryDrain(int battery);
-#line 50 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-int charge(int battery);
-#line 58 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void showBattery();
-#line 68 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void setup();
-#line 91 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
-void loop();
-#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 int currRotLeft = encoder.getCountsAndResetLeft();              
@@ -57,8 +44,11 @@ int batteryDrain(int battery) {
 }
 
 /*int price() {
-    if(totalDistance> 2) {
-
+    if(totalDistance=< 20) {
+        price = 63;
+    }
+    else {
+        price = 
     }
 }*/
 
@@ -71,12 +61,13 @@ int charge(int battery) {
 }
 
 void showBattery() {
+    int disShow = 10*totalDistance;
     display.gotoXY(0, 0); 
     display.print(F("Power: ")); 
     display.println(power); 
     display.gotoXY(0, 1); 
     display.print("Distance drove; "); 
-    display.print(10*totalDistance); 
+    display.print(disShow); 
     display.print("km");
 }
 

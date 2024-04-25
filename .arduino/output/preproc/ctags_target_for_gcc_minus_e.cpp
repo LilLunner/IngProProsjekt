@@ -17,10 +17,10 @@ Zumo32U4Buzzer buzzer;
 Zumo32U4Encoders encoder;
 
 
-int power;
+int power, distMultiplier;
 int amount = 40;
 int max = 80;
-float totalDistance;
+float partDisGlobal, totalDistance;
 
 float distMeasure()
 {
@@ -28,9 +28,15 @@ int currRotLeft = encoder.getCountsAndResetLeft();
 int currRotRight = encoder.getCountsAndResetRight();
 float leftDist = ((((currRotLeft)>0?(currRotLeft):-(currRotLeft)))*3.1415*0.039)/910;
 float rightDist = ((((currRotRight)>0?(currRotRight):-(currRotRight)))*3.1415*0.039)/910;
-float distTot = totalDistance + 10*(leftDist + rightDist)/2;
-EEPROM.write(1, distTot);
-return distTot;
+if (partDisGlobal>=255) {
+    distMultiplier += 1;
+    partDisGlobal -= 255;
+}
+float distPart = partDisGlobal + (10*(leftDist + rightDist)/2);
+EEPROM.write(1, partDisGlobal);
+EEPROM.write(2, distMultiplier);
+Serial.println(distPart);
+return distPart;
 }
 
 int batteryDrain(int battery) {
@@ -60,21 +66,20 @@ int charge(int battery) {
 }
 
 void showBattery() {
-    int disShow = 10*totalDistance;
     display.gotoXY(0, 0);
     display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 64 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 64 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  "Power: "
-# 64 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  ); &__c[0];}))
-# 64 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  )));
     display.println(power);
     display.gotoXY(0, 1);
     display.print("Distance drove; ");
-    display.print(disShow);
+    display.print(10*totalDistance);
     display.print("km");
 }
 
@@ -97,13 +102,16 @@ void setup() {
 
     EEPROM.write(0, 80);
     EEPROM.write(1, 0);
+    EEPROM.write(2,0);
     power = EEPROM.read(0);
-    totalDistance = EEPROM.read(1);
+    partDisGlobal = EEPROM.read(1);
+    distMultiplier = EEPROM.read(2);
 }
 
 void loop() {
     motors.setSpeeds(100,100);
-    totalDistance = distMeasure();
+    partDisGlobal = distMeasure();
+    totalDistance = partDisGlobal+(distMultiplier*255);
     power = batteryDrain(power);
     showBattery();
 }

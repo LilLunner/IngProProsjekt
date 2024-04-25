@@ -18,8 +18,6 @@ Zumo32U4Encoders encoder;
 
 
 int power, distMultiplier;
-int amount = 40;
-int max = 80;
 float partDisGlobal, totalDistance;
 
 float distMeasure()
@@ -40,7 +38,7 @@ return distPart;
 }
 
 int batteryDrain(int battery) {
-    battery = max - 2*totalDistance;
+    battery = 80 - 2*totalDistance;
     if (battery < 0) {
         battery = 0;
     }
@@ -58,9 +56,9 @@ int batteryDrain(int battery) {
 }*/
 
 int charge(int battery) {
-    battery = battery + amount;
-    if(battery>max) {
-        battery = max;
+    battery = battery + 40;
+    if(battery>80) {
+        battery = 80;
     }
     return battery;
 }
@@ -68,13 +66,13 @@ int charge(int battery) {
 void showBattery() {
     display.gotoXY(0, 0);
     display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 67 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 67 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  "Power: "
-# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
+# 67 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino" 3
                  ); &__c[0];}))
-# 69 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+# 67 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
                  )));
     display.println(power);
     display.gotoXY(0, 1);

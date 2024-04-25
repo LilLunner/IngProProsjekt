@@ -19,23 +19,21 @@ Zumo32U4Encoders encoder;
 
 
 int power, distMultiplier;
-int amount = 40;
-int max = 80;
 float partDisGlobal, totalDistance;
 
-#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure();
-#line 41 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 39 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 int batteryDrain(int battery);
-#line 59 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 57 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 int charge(int battery);
-#line 67 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 65 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 void showBattery();
-#line 77 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 75 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 void setup();
-#line 102 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 100 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 void loop();
-#line 24 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
+#line 22 "C:\\Users\\Magnus\\Documents\\IngProProsjekt\\Charging\\Charging.ino"
 float distMeasure()
 {
 int currRotLeft = encoder.getCountsAndResetLeft();              
@@ -54,7 +52,7 @@ return distPart;
 }
 
 int batteryDrain(int battery) {
-    battery = max - 2*totalDistance;
+    battery = 80 - 2*totalDistance;
     if (battery < 0) {
         battery = 0;
     }
@@ -72,9 +70,9 @@ int batteryDrain(int battery) {
 }*/
 
 int charge(int battery) {
-    battery = battery + amount;
-    if(battery>max) {
-        battery = max;
+    battery = battery + 40;
+    if(battery>80) {
+        battery = 80;
     }
     return battery;
 }
